@@ -19,6 +19,7 @@ import com.example.picking.dto.events.PickCreatedEvent;
 import com.example.picking.dto.requests.PickConfirmRequestDTO;
 import com.example.picking.dto.requests.PickCreationRequestDTO;
 import com.example.picking.dto.responses.PickDTO;
+import com.example.util.service.EventPublisher;
 
 @Service
 public class PickingServiceImpl implements PickingService {
