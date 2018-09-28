@@ -45,18 +45,18 @@
 	<dependencies>
 		<dependency>
 		    <groupId>com.example.wms</groupId>
-		    <artifactId>inventory-interfaces</artifactId>
+		    <artifactId>inventory-idd</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 		    <groupId>com.example.wms</groupId>
-		    <artifactId>orderplanner-interfaces</artifactId>
+		    <artifactId>orderplanner-idd</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>	
 		<dependency>
 		    <groupId>com.example.wms</groupId>
-		    <artifactId>picking-interfaces</artifactId>
-		    <version>${version}</version>
+		    <artifactId>picking-idd</artifactId>
+		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>	
 		<dependency>
 		    <groupId>com.h2database</groupId>
