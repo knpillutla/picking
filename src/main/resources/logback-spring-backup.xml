@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+    <appender name="STASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}.elk.log</file>
+  	    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+		     <includeCallerInfo>true</includeCallerInfo>
+		     <customFields>{"appname":"${pom.artifactId}","version":"${pom.version}"}</customFields>
+		</encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+             <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
+         </rollingPolicy>
+     </appender>
+     <logger name="com.example" level="DEBUG"/>
+     <logger name="org.springframework" level="INFO"/>
+	
+    <root level="INFO">
+        <appender-ref ref="STASH"/>
+       	<appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
