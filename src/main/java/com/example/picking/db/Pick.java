@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -108,4 +109,8 @@ public class Pick  implements Serializable{
 	
 	@Column(name="USER_ID")
 	String userId;
+	
+	@Version
+ 	@Column(name="VERSION")
+	Integer version; 	
 }
