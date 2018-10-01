@@ -24,5 +24,6 @@ CREATE TABLE picks
 	HOST_NAME  character varying(50),
     CREATED_DTTM  timestamp default NOW(),
     UPDATED_DTTM  timestamp default NOW(),
-    USER_ID character varying(25)
+    USER_ID character varying(25),
+    VERSION INTEGER
 );
