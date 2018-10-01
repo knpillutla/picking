@@ -14,7 +14,7 @@ public class ScheduledLogger {
 
 /*    @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
-        Date date = new Date();
+        LocalDateTime date = new LocalDateTime();
         log.info("The time is now {}", dateFormat.format(date));
     }*/
 }

@@ -1,5 +1,7 @@
 package com.example.picking.endpoint.listener;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Component;
@@ -20,18 +22,18 @@ public class PickListener {
 	@StreamListener(target = PickingStreams.INVENTORY_OUTPUT, 
 			condition = "headers['eventName']=='InventoryAllocatedEvent'")
 	public void handleInventoryAllocatedEvent(InventoryAllocatedEvent inventoryAllocatedEvent) { 
-		log.info("Received InventoryAllocatedEvent for: {}" + ": at :" + new java.util.Date(), inventoryAllocatedEvent);
+		log.info("Received InventoryAllocatedEvent for: {}" + ": at :" + LocalDateTime.now(), inventoryAllocatedEvent);
 		long startTime = System.currentTimeMillis();
 		try {
 			pickService.createPick(InventoryToPickConverter.createPickCreationRequest(inventoryAllocatedEvent));
 			long endTime = System.currentTimeMillis();
 			log.info("Completed Processing InventoryAllocatedEvent for: " + inventoryAllocatedEvent + ": at :"
-					+ new java.util.Date() + " : total time:" + (endTime - startTime) / 1000.00 + " secs");
+					+ LocalDateTime.now() + " : total time:" + (endTime - startTime) / 1000.00 + " secs");
 		} catch (Exception e) {
 			e.printStackTrace();
 			long endTime = System.currentTimeMillis();
 			log.error("Error Completing InventoryAllocatedEvent for: " + inventoryAllocatedEvent + ": at :"
-					+ new java.util.Date() + " : total time:" + (endTime - startTime) / 1000.00 + " secs", e);
+					+ LocalDateTime.now() + " : total time:" + (endTime - startTime) / 1000.00 + " secs", e);
 		}
 	}
 }

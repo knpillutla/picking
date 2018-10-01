@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.example.picking.streams.PickingStreams;
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @EnableAutoConfiguration
 @EnableBinding(PickingStreams.class)
 @EnableScheduling
+@EnableJpaAuditing
 @Slf4j
 public class PickingApplication {
 	@Autowired

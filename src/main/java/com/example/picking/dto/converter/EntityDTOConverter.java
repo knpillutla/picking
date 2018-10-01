@@ -1,7 +1,5 @@
 package com.example.picking.dto.converter;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Component;
 
 import com.example.picking.db.Pick;
