@@ -2,11 +2,10 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <springProperty name="appName" source="spring.application.name"/>
-    <springProperty name="logfile" source="service.elk.log.file"/>
     
     <logger name="org.springframework" level="INFO"/>
 	<appender name="STASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
-	    <file>${logfile}</file>
+		<file>${LOG_FILE}.log</file>
 	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 	        <fileNamePattern>${LOG_FILE}.%d{MM-dd-yyyy}.log</fileNamePattern>
 	        <maxHistory>10</maxHistory>
