@@ -27,17 +27,23 @@ import lombok.extern.slf4j.Slf4j;
 @RefreshScope
 @Slf4j
 public class PickingRestEndPoint {
-
-    @Value("${message: Picking Service - Config Server is not working..pelase check}")
-    private String msg;
-    
     @Autowired
 	PickingService pickingService;
-	Logger logger = LoggerFactory.getLogger(PickingRestEndPoint.class);
 	
-	@GetMapping("/")
-	public ResponseEntity hello() throws Exception {
-		return ResponseEntity.ok(msg);
+    @Value("${wms.service.health.msg: Picking Service - Config Server is not working..please check}")
+    private String healthMsg;
+    
+    @Value("${wms.service.ready.msg: Picking Service - Not ready yet}")
+    private String readyMsg;
+
+	@GetMapping("/ready")
+	public ResponseEntity ready() throws Exception {
+		return ResponseEntity.ok(readyMsg);
+	}
+	
+	@GetMapping("/health")
+	public ResponseEntity health() throws Exception {
+		return ResponseEntity.ok(healthMsg);
 	}
 	
 	@PostMapping("/{busName}/{locnNbr}/picks/next/{userId}")
