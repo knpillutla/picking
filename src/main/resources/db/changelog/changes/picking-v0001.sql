@@ -27,4 +27,5 @@ CREATE TABLE picks
     UPDATED_DTTM  timestamp default NOW(),
     USER_ID character varying(25),
     VERSION INTEGER
+    
 );
