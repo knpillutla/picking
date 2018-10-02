@@ -44,6 +44,10 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+		</dependency>	
+		<dependency>
 		    <groupId>com.example.wms</groupId>
 		    <artifactId>wms-util</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
