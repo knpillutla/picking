@@ -1,4 +1,4 @@
-package com.example.picking;
+package com.threedsoft.picking;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

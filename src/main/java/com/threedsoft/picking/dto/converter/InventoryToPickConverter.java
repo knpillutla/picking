@@ -1,15 +1,17 @@
-package com.example.picking.dto.converter;
+package com.threedsoft.picking.dto.converter;
 
 import org.springframework.stereotype.Component;
 
-import com.example.inventory.dto.events.InventoryAllocatedEvent;
-import com.example.inventory.dto.responses.InventoryDTO;
-import com.example.picking.dto.requests.PickCreationRequestDTO;
+import com.threedsoft.inventory.dto.events.InventoryAllocatedEvent;
+import com.threedsoft.inventory.dto.responses.InventoryResourceDTO;
+import com.threedsoft.picking.dto.requests.PickCreationRequestDTO;
+import com.threedsoft.util.dto.events.EventResourceConverter;
 
 @Component
 public class InventoryToPickConverter {
 	public static PickCreationRequestDTO createPickCreationRequest(InventoryAllocatedEvent invnAllocatedEvent) {
-		InventoryDTO inventoryDTO = invnAllocatedEvent.getInventoryDTO();
+		InventoryResourceDTO inventoryDTO = (InventoryResourceDTO) EventResourceConverter
+				.getObject(invnAllocatedEvent.getEventResource(), invnAllocatedEvent.getEventResourceClassName());
 		PickCreationRequestDTO pickReq = new PickCreationRequestDTO();
 		pickReq.setBusName(inventoryDTO.getBusName());
 		pickReq.setLocnNbr(inventoryDTO.getLocnNbr());

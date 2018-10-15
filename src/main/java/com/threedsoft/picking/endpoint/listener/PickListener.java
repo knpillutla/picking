@@ -1,4 +1,4 @@
-package com.example.picking.endpoint.listener;
+package com.threedsoft.picking.endpoint.listener;
 
 import java.time.LocalDateTime;
 
@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.stereotype.Component;
 
-import com.example.inventory.dto.events.InventoryAllocatedEvent;
-import com.example.picking.dto.converter.InventoryToPickConverter;
-import com.example.picking.service.PickingService;
-import com.example.picking.streams.PickingStreams;
+import com.threedsoft.inventory.dto.events.InventoryAllocatedEvent;
+import com.threedsoft.picking.dto.converter.InventoryToPickConverter;
+import com.threedsoft.picking.service.PickingService;
+import com.threedsoft.picking.streams.PickingStreams;
 
 import lombok.extern.slf4j.Slf4j;
 

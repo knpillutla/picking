@@ -1,4 +1,4 @@
-package com.example.picking.endpoint.rest;
+package com.threedsoft.picking.endpoint.rest;
 
 public class ErrorRestResponse {
 	int responseCode;

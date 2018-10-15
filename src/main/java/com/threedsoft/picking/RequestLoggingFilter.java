@@ -1,4 +1,4 @@
-package com.example.picking;
+package com.threedsoft.picking;
 
 import static net.logstash.logback.marker.Markers.appendEntries;
 

@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.example.wms</groupId>
+	<groupId>com.threedsoft.wms</groupId>
 	<artifactId>picking</artifactId>
 	<packaging>jar</packaging>
 	<name>picking</name>
@@ -48,22 +48,22 @@
 			<artifactId>liquibase-core</artifactId>
 		</dependency>	
 		<dependency>
-		    <groupId>com.example.wms</groupId>
+		    <groupId>com.threedsoft.wms</groupId>
 		    <artifactId>wms-util</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.example.wms</groupId>
+		    <groupId>com.threedsoft.wms</groupId>
 		    <artifactId>inventory-idd</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.example.wms</groupId>
+		    <groupId>com.threedsoft.wms</groupId>
 		    <artifactId>orderplanner-idd</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>	
 		<dependency>
-		    <groupId>com.example.wms</groupId>
+		    <groupId>com.threedsoft.wms</groupId>
 		    <artifactId>picking-idd</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>	

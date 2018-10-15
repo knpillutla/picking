@@ -1,4 +1,4 @@
-package com.example.picking.db;
+package com.threedsoft.picking.db;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

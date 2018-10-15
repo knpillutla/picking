@@ -5,9 +5,9 @@ CREATE TABLE picks
     BATCH_NBR character varying(50), 
     BUS_NAME character varying(50),
 	LOCN_NBR integer not null default 0,
+	COMPANY  character varying(15), -- is gift
+	DIVISION  character varying(10), -- is gift
 	BUS_UNIT  character varying(3) NOT NULL,
-	COMPANY  character varying(10),
-	DIVISION  character varying(10),
     LOCN_BRCD character varying(25),
     ITEM_BRCD character varying(25),
     QTY integer NOT NULL DEFAULT 0,

@@ -1,18 +1,18 @@
-package com.example.picking.dto.converter;
+package com.threedsoft.picking.dto.converter;
 
 import org.springframework.stereotype.Component;
 
-import com.example.picking.db.Pick;
-import com.example.picking.dto.requests.PickCreationRequestDTO;
-import com.example.picking.dto.responses.PickDTO;
+import com.threedsoft.picking.db.Pick;
+import com.threedsoft.picking.dto.requests.PickCreationRequestDTO;
+import com.threedsoft.picking.dto.responses.PickResourceDTO;
 
 @Component
 public class EntityDTOConverter {
 
-	public static PickDTO getPickDTO(Pick pickEntity) {
+	public static PickResourceDTO getPickDTO(Pick pickEntity) {
 		if (pickEntity == null)
 			return null;
-		PickDTO pickDTO = new PickDTO(pickEntity.getId(), pickEntity.getOrderLineId(), pickEntity.getBatchNbr(),
+		PickResourceDTO pickDTO = new PickResourceDTO(pickEntity.getId(), pickEntity.getOrderLineId(), pickEntity.getBatchNbr(),
 				pickEntity.getBusName(), pickEntity.getLocnNbr(), pickEntity.getBusUnit(), pickEntity.getCompany(),
 				pickEntity.getDivision(), pickEntity.getLocnBrcd(), pickEntity.getItemBrcd(), pickEntity.getQty(),
 				pickEntity.getPickedQty(), pickEntity.getFromContainer(), pickEntity.getToContainer(),

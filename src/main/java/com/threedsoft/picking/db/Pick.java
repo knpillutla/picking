@@ -1,4 +1,4 @@
-package com.example.picking.db;
+package com.threedsoft.picking.db;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package com.example.picking.endpoint.rest;
+package com.threedsoft.picking.endpoint.rest;
 
 import java.io.IOException;
 
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.picking.dto.requests.PickConfirmRequestDTO;
-import com.example.picking.service.PickingService;
+import com.threedsoft.picking.dto.requests.PickConfirmRequestDTO;
+import com.threedsoft.picking.service.PickingService;
 
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
