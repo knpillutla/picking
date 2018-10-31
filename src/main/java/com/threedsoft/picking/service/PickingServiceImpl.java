@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.threedsoft.picking.db.Pick;
@@ -18,7 +19,9 @@ import com.threedsoft.picking.dto.events.PickConfirmationEvent;
 import com.threedsoft.picking.dto.events.PickCreatedEvent;
 import com.threedsoft.picking.dto.requests.PickConfirmRequestDTO;
 import com.threedsoft.picking.dto.requests.PickCreationRequestDTO;
+import com.threedsoft.picking.dto.requests.PickSearchRequestDTO;
 import com.threedsoft.picking.dto.responses.PickResourceDTO;
+import com.threedsoft.picking.util.PickStatus;
 import com.threedsoft.picking.util.PickingConstants;
 import com.threedsoft.util.service.EventPublisher;
 
@@ -32,25 +35,12 @@ public class PickingServiceImpl implements PickingService {
 	@Autowired
 	EventPublisher eventPublisher;
 	
-	public enum PickStatus {
-		CREATED(100), LOCKED(105), RELEASED(110), ASSIGNED(115), PICKED(120), SHORTED(140), CANCELLED(199);
-		PickStatus(Integer statCode) {
-			this.statCode = statCode;
-		}
-
-		private Integer statCode;
-
-		public Integer getStatCode() {
-			return statCode;
-		}
-	}
-	
 	@Override
 	@Transactional
 	public PickResourceDTO assignNextPick(String busName, Integer locnNbr, String userId) throws Exception {
 		// find the next pick which is in status READY order by pickId(to start with), batchNbr, priority, createdDttm
-		Pick pickEntity = pickDAO.findNextPickId(busName, locnNbr, PickStatus.RELEASED.getStatCode());
-		pickEntity.setStatCode(PickStatus.ASSIGNED.getStatCode());
+		Pick pickEntity = pickDAO.findNextPickId(busName, locnNbr, PickStatus.RELEASED.getStatus());
+		pickEntity.setStatus(PickStatus.ASSIGNED.getStatus());
 		pickEntity.setUserId(userId);
 		Pick savedPickEntity = pickDAO.save(pickEntity);
 		return EntityDTOConverter.getPickDTO(pickEntity);
@@ -60,8 +50,8 @@ public class PickingServiceImpl implements PickingService {
 	@Transactional
 	public PickResourceDTO assignNextPick(String busName, Integer locnNbr, String batchNbr, String userId) throws Exception {
 		// find the next pick which is in status READY order by pickId(to start with), batchNbr, priority, createdDttm
-		Pick pickEntity = pickDAO.findNextPickIdByBatchNbr(busName, locnNbr, batchNbr, PickStatus.RELEASED.getStatCode());
-		pickEntity.setStatCode(PickStatus.ASSIGNED.getStatCode());
+		Pick pickEntity = pickDAO.findNextPickIdByBatchNbr(busName, locnNbr, batchNbr, PickStatus.RELEASED.getStatus());
+		pickEntity.setStatus(PickStatus.ASSIGNED.getStatus());
 		pickEntity.setUserId(userId);
 		Pick savedPickEntity = pickDAO.save(pickEntity);
 		return EntityDTOConverter.getPickDTO(pickEntity);
@@ -77,7 +67,7 @@ public class PickingServiceImpl implements PickingService {
 			Pick pickEntity = pickDtl.get();
 			pickEntity.setPickedQty(pickEntity.getPickedQty() + pickConfirmRequest.getQtyPicked());
 			pickEntity.setUserId(pickConfirmRequest.getUserId());
-			pickEntity.setStatCode(PickStatus.PICKED.getStatCode());
+			pickEntity.setStatus(PickStatus.PICKED.getStatus());
 			pickEntity.setToContainer(pickConfirmRequest.getToContainer());
 			Pick updatedPickObj = pickDAO.save(pickEntity);
 			pickDTO = EntityDTOConverter.getPickDTO(updatedPickObj);
@@ -95,7 +85,7 @@ public class PickingServiceImpl implements PickingService {
 	@Transactional
 	public PickResourceDTO createPick(PickCreationRequestDTO pickCreationReq) throws Exception {
 		Pick newPickEntity = EntityDTOConverter.getPickEntity(pickCreationReq);
-		newPickEntity.setStatCode(PickStatus.RELEASED.getStatCode());
+		newPickEntity.setStatus(PickStatus.RELEASED.getStatus());
 		PickResourceDTO pickDTO = EntityDTOConverter.getPickDTO(pickDAO.save(newPickEntity));
 		PickCreatedEvent pickCreatedEvent = new PickCreatedEvent(pickDTO, PickingConstants.PICKING_SERVICE_NAME);
 		eventPublisher.publish(pickCreatedEvent);
@@ -122,7 +112,7 @@ public class PickingServiceImpl implements PickingService {
 		List<PickResourceDTO> pickDTOList = new ArrayList();
 		if(pickEntityList!=null) {
 			for(Pick pickEntity : pickEntityList) {
-				pickEntity.setStatCode(PickStatus.RELEASED.getStatCode());
+				pickEntity.setStatus(PickStatus.RELEASED.getStatus());
 				pickDTOList.add(EntityDTOConverter.getPickDTO(pickDAO.save(pickEntity)));
 			}
 		}
@@ -136,7 +126,7 @@ public class PickingServiceImpl implements PickingService {
 		List<PickResourceDTO> pickDTOList = new ArrayList();
 		if(pickEntityList!=null) {
 			for(Pick pickEntity : pickEntityList) {
-				pickEntity.setStatCode(PickStatus.RELEASED.getStatCode());
+				pickEntity.setStatus(PickStatus.RELEASED.getStatus());
 				pickDTOList.add(EntityDTOConverter.getPickDTO(pickDAO.save(pickEntity)));
 			}
 		}
@@ -161,4 +151,29 @@ public class PickingServiceImpl implements PickingService {
 		return pickDTOList;
 	}
 
+	@Override
+	public List<PickResourceDTO> findByBusNameAndLocnNbr(String busName, Integer locnNbr)  throws Exception{
+		PageRequest pageRequest = new PageRequest(0, 20);
+		List<Pick> pickEntityList = pickDAO.findByBusNameAndLocnNbr(busName, locnNbr,pageRequest);
+		List<PickResourceDTO> pickDTOList = new ArrayList();
+		if(pickEntityList!=null) {
+			for(Pick pickEntity : pickEntityList) {
+				pickDTOList.add(EntityDTOConverter.getPickDTO(pickEntity));
+			}
+		}
+		return pickDTOList;
+	}
+
+	@Override
+	public List<PickResourceDTO> searchPicks(String busName, Integer locnNbr, PickSearchRequestDTO pickSearchReq) throws Exception {
+/*		PageRequest pageRequest = new PageRequest(0, 20);
+		List<Pick> pickEntityList = pickDAO.findAllEntitiesOrderedBy(new Pick(), "id", true);
+		List<PickResourceDTO> pickDTOList = new ArrayList();
+		if(pickEntityList!=null) {
+			for(Pick pickEntity : pickEntityList) {
+				pickDTOList.add(EntityDTOConverter.getPickDTO(pickEntity));
+			}
+		}*/
+		return new ArrayList();
+	}
 }

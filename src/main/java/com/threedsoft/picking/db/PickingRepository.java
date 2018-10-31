@@ -2,6 +2,7 @@ package com.threedsoft.picking.db;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,6 +15,9 @@ public interface PickingRepository extends JpaRepository<Pick, Long>, PickingRep
 
 	@Query("select s from Pick s where s.busName=:busName and s.locnNbr=:locnNbr and s.orderNbr=:orderNbr")
 	public List<Pick> findByBusNameAndLocnNbrAndOrderNbr(@Param("busName") String busName, @Param("locnNbr") Integer locnNbr, @Param("orderNbr") String orderNbr);
+
+	@Query("select s from Pick s where s.busName=:busName and s.locnNbr=:locnNbr")
+	public List<Pick> findByBusNameAndLocnNbr(@Param("busName") String busName, @Param("locnNbr") Integer locnNbr, Pageable pageRequest);
 
 	@Query("select s from Pick s where s.busName=:busName and s.locnNbr=:locnNbr and s.batchNbr=:batchNbr")
 	public List<Pick> findByBusNameAndLocnNbrAndBatchNbr(@Param("busName") String busName, @Param("locnNbr") Integer locnNbr, @Param("batchNbr") String batchNbr);

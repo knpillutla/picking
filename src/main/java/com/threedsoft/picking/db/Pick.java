@@ -67,8 +67,8 @@ public class Pick  implements Serializable{
 	@Column(name="TO_CONTAINER_NBR")
 	String toContainer;
 
-	@Column(name="STAT_CODE")
-	Integer statCode;
+	@Column(name="STATUS")
+	String status;
 
 	@Column(name="ORDER_ID")
 	Long orderId;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.threedsoft.picking.dto.requests.PickConfirmRequestDTO;
 import com.threedsoft.picking.dto.requests.PickCreationRequestDTO;
+import com.threedsoft.picking.dto.requests.PickSearchRequestDTO;
 import com.threedsoft.picking.dto.requests.PicklistCreationRequestDTO;
 import com.threedsoft.picking.dto.responses.PickResourceDTO;
 import com.threedsoft.picking.dto.responses.PicklistResourceDTO;
@@ -26,4 +27,8 @@ public interface PickingService {
 	PickResourceDTO assignNextPick(String busName, Integer locnNbr, String userId) throws Exception;
 
 	PickResourceDTO assignNextPick(String busName, Integer locnNbr, String batchNbr, String userId) throws Exception;
+
+	public List<PickResourceDTO> findByBusNameAndLocnNbr(String busName, Integer locnNbr)  throws Exception;
+
+	public List<PickResourceDTO> searchPicks(String busName, Integer locnNbr, PickSearchRequestDTO pickSearchReq)  throws Exception;
 }

@@ -14,7 +14,7 @@ CREATE TABLE picks
     PICKED_QTY integer DEFAULT 0,
     FROM_CONTAINER_NBR  character varying(25),
     TO_CONTAINER_NBR  character varying(25),
-    STAT_CODE integer DEFAULT 0,
+    STATUS character varying(25),
     ORDER_ID   INTEGER NOT NULL,
     ORDER_NBR  character varying(25),
 	ORDER_LINE_NBR  INTEGER NOT NULL,

@@ -16,7 +16,7 @@ public class EntityDTOConverter {
 				pickEntity.getBusName(), pickEntity.getLocnNbr(), pickEntity.getBusUnit(), pickEntity.getCompany(),
 				pickEntity.getDivision(), pickEntity.getLocnBrcd(), pickEntity.getItemBrcd(), pickEntity.getQty(),
 				pickEntity.getPickedQty(), pickEntity.getFromContainer(), pickEntity.getToContainer(),
-				pickEntity.getStatCode(), pickEntity.getOrderId(), pickEntity.getOrderNbr(), pickEntity.getPackageNbr(),
+				pickEntity.getStatus(), pickEntity.getOrderId(), pickEntity.getOrderNbr(), pickEntity.getPackageNbr(),
 				pickEntity.getOrderLineNbr(), pickEntity.getTransName(), pickEntity.getSource(),
 				pickEntity.getHostName(), pickEntity.getUserId());
 		return pickDTO;
