@@ -16,11 +16,11 @@ public class PickingRepositoryImpl implements PickingRepositoryCustom {
 	@Override
 	public Pick findNextPickId(String busName, Integer locnNbr, String status) {
 		Query query = entityManager.createQuery(
-				"select s from Pick s where s.busName=:busName and s.locnNbr=:locnNbr and s.statCode=:statCode order by s.id desc",
+				"select s from Pick s where s.busName=:busName and s.locnNbr=:locnNbr and s.status=:status order by s.id desc",
 				Pick.class);
 		query.setParameter("busName", busName);
 		query.setParameter("locnNbr", locnNbr);
-		query.setParameter("statCode", status);
+		query.setParameter("status", status);
 		query.setMaxResults(1);
 		return (Pick) query.getSingleResult();
 	}
@@ -28,12 +28,12 @@ public class PickingRepositoryImpl implements PickingRepositoryCustom {
 	@Override
 	public Pick findNextPickIdByBatchNbr(String busName, Integer locnNbr, String batchNbr, String status) {
 		Query query = entityManager.createQuery(
-				"select s from Pick s where s.busName=:busName and s.locnNbr=:locnNbr and s.batchNbr=:batchNbr and s.statCode=:statCode order by s.id desc",
+				"select s from Pick s where s.busName=:busName and s.locnNbr=:locnNbr and s.batchNbr=:batchNbr and s.status=:status order by s.id desc",
 				Pick.class);
 		query.setParameter("busName", busName);
 		query.setParameter("locnNbr", locnNbr);
 		query.setParameter("batchNbr", batchNbr);
-		query.setParameter("statCode", status);
+		query.setParameter("status", status);
 		query.setMaxResults(1);
 		return (Pick) query.getSingleResult();
 	}
