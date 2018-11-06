@@ -4,10 +4,11 @@ import org.springframework.stereotype.Component;
 
 import com.threedsoft.picking.db.Pick;
 import com.threedsoft.picking.dto.requests.PickCreationRequestDTO;
+import com.threedsoft.picking.dto.requests.PickSearchRequestDTO;
 import com.threedsoft.picking.dto.responses.PickResourceDTO;
 
 @Component
-public class EntityDTOConverter {
+public class PickDTOConverter {
 
 	public static PickResourceDTO getPickDTO(Pick pickEntity) {
 		if (pickEntity == null)
@@ -40,6 +41,23 @@ public class EntityDTOConverter {
 		newPickEntity.setToContainer(pickCreationReqDTO.getToContainer());
 		newPickEntity.setPickedQty(0);
 		newPickEntity.setOrderLineId(pickCreationReqDTO.getOrderLineId());
+		return newPickEntity;
+	}
+	
+	public static Pick getPickEntityForSearch(PickSearchRequestDTO pickSearchReqDTO) {
+		Pick newPickEntity = new Pick();
+		newPickEntity.setBusName(pickSearchReqDTO.getBusName());
+		newPickEntity.setLocnNbr(pickSearchReqDTO.getLocnNbr());
+		newPickEntity.setLocnBrcd(pickSearchReqDTO.getLocnBrcd());
+		newPickEntity.setItemBrcd(pickSearchReqDTO.getItemBrcd());
+		newPickEntity.setOrderId(pickSearchReqDTO.getOrderId());
+		newPickEntity.setOrderNbr(pickSearchReqDTO.getOrderNbr());
+		newPickEntity.setBusUnit(pickSearchReqDTO.getBusUnit());
+		newPickEntity.setBatchNbr(pickSearchReqDTO.getBatchNbr());
+		newPickEntity.setCompany(pickSearchReqDTO.getCompany());
+		newPickEntity.setDivision(pickSearchReqDTO.getDivision());
+		newPickEntity.setFromContainer(pickSearchReqDTO.getFromContainer());
+		newPickEntity.setToContainer(pickSearchReqDTO.getToContainer());
 		return newPickEntity;
 	}
 }
