@@ -37,13 +37,13 @@ public class PickingApplication {
 	
 	@Bean
 	public CorsFilter corsFilter() {
-
 	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	    CorsConfiguration config = new CorsConfiguration();
 	    config.setAllowCredentials(true); 
 	    config.addAllowedOrigin("http://*the3dsoft.com");
 	    config.addAllowedOrigin("http://localhost");
 	    config.addAllowedOrigin("https://localhost:5000");
+	    config.addAllowedOrigin("*");
 	    config.addAllowedHeader("*");
 	    config.addAllowedMethod("*");
 	    source.registerCorsConfiguration("/**", config);

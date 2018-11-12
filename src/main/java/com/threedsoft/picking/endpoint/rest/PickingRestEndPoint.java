@@ -170,7 +170,7 @@ public class PickingRestEndPoint {
 			e.printStackTrace();
 			return ResponseEntity.badRequest()
 					.body(new ErrorResourceDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-							"Error Occured for search request busName:" + busName + ", pickSearchReq:" + pickSearchReq
+							"Error Occured for pick search request busName:" + busName + ", pickSearchReq:" + pickSearchReq
 									+ " : " + e.getMessage()));
 		}
 	}
