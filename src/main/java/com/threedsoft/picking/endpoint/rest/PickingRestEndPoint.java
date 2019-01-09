@@ -123,7 +123,7 @@ public class PickingRestEndPoint {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return ResponseEntity.badRequest().body(new ErrorResourceDTO(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-					"Error Occured for GET request busName:" + busName + ", id:" + id + " : " + e.getMessage()));
+					"Error Occured for confirmPick request busName:" + busName + ", id:" + id + " : " + e.getMessage()));
 		}
 	}
 
