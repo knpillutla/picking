@@ -45,10 +45,13 @@ public class PickingServiceImpl implements PickingService {
 	public PickResourceDTO assignNextPick(String busName, Integer locnNbr, String userId) throws Exception {
 		// find the next pick which is in status READY order by pickId(to start with),
 		// batchNbr, priority, createdDttm
-		Pick pickEntity = pickDAO.findNextPickId(busName, locnNbr, PickStatus.RELEASED.getStatus());
-		pickEntity.setStatus(PickStatus.ASSIGNED.getStatus());
-		pickEntity.setUserId(userId);
-		Pick savedPickEntity = pickDAO.save(pickEntity);
+		Pick pickEntity = pickDAO.findAssignedPickForUser(busName, locnNbr, userId);
+		if(pickEntity == null) {
+			pickEntity = pickDAO.findNextPickId(busName, locnNbr, PickStatus.RELEASED.getStatus());
+			pickEntity.setStatus(PickStatus.ASSIGNED.getStatus());
+			pickEntity.setUserId(userId);
+			pickEntity = pickDAO.save(pickEntity);
+		}
 		return PickDTOConverter.getPickDTO(pickEntity);
 	}
 

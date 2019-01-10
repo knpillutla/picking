@@ -9,6 +9,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import com.threedsoft.picking.util.PickStatus;
+import com.threedsoft.picking.util.PickingConstants;
+
 public class PickingRepositoryImpl implements PickingRepositoryCustom {
 	@PersistenceContext
 	EntityManager entityManager;
@@ -49,5 +52,17 @@ public class PickingRepositoryImpl implements PickingRepositoryCustom {
 	    criteria.orderBy(order);
 	    return entityManager.createQuery(criteria).getResultList();
 	}
+
+	@Override
+	public Pick findAssignedPickForUser(String busName, Integer locnNbr, String userId) {
+		Query query = entityManager.createQuery(
+				"select s from Pick s where s.busName=:busName and s.locnNbr=:locnNbr and s.status=:status and s.user_id=:userId order by s.id",
+				Pick.class);
+		query.setParameter("busName", busName);
+		query.setParameter("locnNbr", locnNbr);
+		query.setParameter("status", PickStatus.ASSIGNED);
+		query.setParameter("userId", userId);
+		query.setMaxResults(1);
+		return (Pick) query.getSingleResult();	}
 	
 }

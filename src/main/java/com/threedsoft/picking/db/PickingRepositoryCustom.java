@@ -12,6 +12,9 @@ public interface PickingRepositoryCustom {
 	public Pick findNextPickId(@Param("busName") String busName, @Param("locnNbr") Integer locnNbr,
 			@Param("status") String status);
 
+	public Pick findAssignedPickForUser(@Param("busName") String busName, @Param("locnNbr") Integer locnNbr,
+			@Param("userId") String userId);
+	
 	public Pick findNextPickIdByBatchNbr(@Param("busName") String busName, @Param("locnNbr") Integer locnNbr,
 			@Param("batchNbr") String batchNbr, @Param("status") String status);
 
