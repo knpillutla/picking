@@ -56,11 +56,11 @@ public class PickingRepositoryImpl implements PickingRepositoryCustom {
 	@Override
 	public Pick findAssignedPickForUser(String busName, Integer locnNbr, String userId) {
 		Query query = entityManager.createQuery(
-				"select s from Pick s where s.busName=:busName and s.locnNbr=:locnNbr and s.status=:status and s.user_id=:userId order by s.id",
+				"select s from Pick s where s.busName=:busName and s.locnNbr=:locnNbr and s.status=:status and s.userId=:userId order by s.id",
 				Pick.class);
 		query.setParameter("busName", busName);
 		query.setParameter("locnNbr", locnNbr);
-		query.setParameter("status", PickStatus.ASSIGNED);
+		query.setParameter("status", PickStatus.ASSIGNED.getStatus());
 		query.setParameter("userId", userId);
 		query.setMaxResults(1);
 		return (Pick) query.getSingleResult();	}
